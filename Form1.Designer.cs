@@ -29,47 +29,47 @@ namespace DropZip
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxOutDir = new System.Windows.Forms.TextBox();
-            this.labelOutDir = new System.Windows.Forms.Label();
-            this.labelDragSpace = new System.Windows.Forms.Label();
+            this.outDirTextBox = new System.Windows.Forms.TextBox();
+            this.outDirLabel = new System.Windows.Forms.Label();
+            this.dragSpaceArea = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBoxOutDir
+            // outDirTextBox
             // 
-            this.textBoxOutDir.Location = new System.Drawing.Point(96, 6);
-            this.textBoxOutDir.Name = "textBoxOutDir";
-            this.textBoxOutDir.Size = new System.Drawing.Size(313, 19);
-            this.textBoxOutDir.TabIndex = 1;
-            this.textBoxOutDir.TextChanged += new System.EventHandler(this.textBoxOutDir_TextChanged);
+            this.outDirTextBox.Location = new System.Drawing.Point(96, 6);
+            this.outDirTextBox.Name = "outDirTextBox";
+            this.outDirTextBox.Size = new System.Drawing.Size(313, 19);
+            this.outDirTextBox.TabIndex = 1;
+            this.outDirTextBox.TextChanged += new System.EventHandler(this.textBoxOutDir_TextChanged);
             // 
-            // labelOutDir
+            // outDirLabel
             // 
-            this.labelOutDir.AutoSize = true;
-            this.labelOutDir.Location = new System.Drawing.Point(12, 9);
-            this.labelOutDir.Name = "labelOutDir";
-            this.labelOutDir.Size = new System.Drawing.Size(78, 12);
-            this.labelOutDir.TabIndex = 3;
-            this.labelOutDir.Text = "出力ディレクトリ";
+            this.outDirLabel.AutoSize = true;
+            this.outDirLabel.Location = new System.Drawing.Point(12, 9);
+            this.outDirLabel.Name = "outDirLabel";
+            this.outDirLabel.Size = new System.Drawing.Size(78, 12);
+            this.outDirLabel.TabIndex = 3;
+            this.outDirLabel.Text = "出力ディレクトリ";
             // 
-            // labelDragSpace
+            // dragSpaceArea
             // 
-            this.labelDragSpace.AllowDrop = true;
-            this.labelDragSpace.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.labelDragSpace.Location = new System.Drawing.Point(14, 43);
-            this.labelDragSpace.Name = "labelDragSpace";
-            this.labelDragSpace.Size = new System.Drawing.Size(395, 229);
-            this.labelDragSpace.TabIndex = 4;
-            this.labelDragSpace.DragDrop += new System.Windows.Forms.DragEventHandler(this.DragDrop);
-            this.labelDragSpace.DragEnter += new System.Windows.Forms.DragEventHandler(this.DragEnter);
+            this.dragSpaceArea.AllowDrop = true;
+            this.dragSpaceArea.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dragSpaceArea.Location = new System.Drawing.Point(14, 43);
+            this.dragSpaceArea.Name = "dragSpaceArea";
+            this.dragSpaceArea.Size = new System.Drawing.Size(395, 229);
+            this.dragSpaceArea.TabIndex = 4;
+            this.dragSpaceArea.DragDrop += new System.Windows.Forms.DragEventHandler(this.DragDrop);
+            this.dragSpaceArea.DragEnter += new System.Windows.Forms.DragEventHandler(this.DragEnter);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(420, 278);
-            this.Controls.Add(this.labelDragSpace);
-            this.Controls.Add(this.labelOutDir);
-            this.Controls.Add(this.textBoxOutDir);
+            this.Controls.Add(this.dragSpaceArea);
+            this.Controls.Add(this.outDirLabel);
+            this.Controls.Add(this.outDirTextBox);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -78,9 +78,9 @@ namespace DropZip
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBoxOutDir;
-        private System.Windows.Forms.Label labelOutDir;
-        private System.Windows.Forms.Label labelDragSpace;
+        private System.Windows.Forms.TextBox outDirTextBox;
+        private System.Windows.Forms.Label outDirLabel;
+        private System.Windows.Forms.Label dragSpaceArea;
     }
 }
 

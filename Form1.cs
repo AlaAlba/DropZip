@@ -24,9 +24,14 @@ namespace DropZip
 
         }
 
+        /// <summary>
+        /// ドラッグ完了時イベント
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DragDrop(object sender, DragEventArgs e)
         {
-            labelDragSpace.Text = "";
+            dragSpaceArea.Text = "";
 
             // ドロップされたファイルのファイル名を取得する
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
@@ -38,21 +43,21 @@ namespace DropZip
                 string fileName = Path.GetFileNameWithoutExtension(filePath);
 
                 var fileExits = Directory
-                    .GetFiles(this.textBoxOutDir.Text, $"{fileName}*")
+                    .GetFiles(this.outDirTextBox.Text, $"{fileName}*")
                     .Any();
 
                 if (fileExits)
                 {
-                    labelDragSpace.Text += $"{fileName} は既に存在しています。\r\n";
+                    dragSpaceArea.Text += $"{fileName} は既に存在しています。\r\n";
                 }
                 else
                 {
                     // Zip化
                     ZipFile.CreateFromDirectory(
                         filePath,
-                        Path.Combine(this.textBoxOutDir.Text, fileName + ".zip")
+                        Path.Combine(this.outDirTextBox.Text, fileName + ".zip")
                         );
-                    labelDragSpace.Text += filePath + " Done! \r\n";
+                    dragSpaceArea.Text += filePath + " Done! \r\n";
 
                 }
             }
@@ -60,17 +65,22 @@ namespace DropZip
 
         }
 
+        /// <summary>
+        /// ドラッグ＆ドロップしたときのイベント（受け入れチェック）
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DragEnter(object sender, DragEventArgs e)
         {
-            // 出力ディレクトリが指定されているときのみ、ドラッグ＆ドロップを受け入れる
-            if (!Directory.Exists(textBoxOutDir.Text))
+            // 正しい出力ディレクトリが指定されていなければ受け入れない
+            if (!Directory.Exists(outDirTextBox.Text))
             {
                 e.Effect = DragDropEffects.None;
                 return;
             }
 
 
-            // エクスプローラーからのファイルのドロップの場合、ドラッグ＆ドロップを受け入れる
+            // エクスプローラーからのファイルのドロップでなければ受け入れない
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effect = DragDropEffects.All;
