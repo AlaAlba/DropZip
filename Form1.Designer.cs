@@ -32,6 +32,8 @@ namespace DropZip
             this.outDirTextBox = new System.Windows.Forms.TextBox();
             this.outDirLabel = new System.Windows.Forms.Label();
             this.dragSpaceArea = new System.Windows.Forms.Label();
+            this.resultTextBox = new System.Windows.Forms.TextBox();
+            this.clearButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // outDirTextBox
@@ -40,7 +42,7 @@ namespace DropZip
             | System.Windows.Forms.AnchorStyles.Right)));
             this.outDirTextBox.Location = new System.Drawing.Point(96, 6);
             this.outDirTextBox.Name = "outDirTextBox";
-            this.outDirTextBox.Size = new System.Drawing.Size(117, 19);
+            this.outDirTextBox.Size = new System.Drawing.Size(429, 19);
             this.outDirTextBox.TabIndex = 1;
             this.outDirTextBox.TextChanged += new System.EventHandler(this.textBoxOutDir_TextChanged);
             // 
@@ -60,18 +62,40 @@ namespace DropZip
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dragSpaceArea.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dragSpaceArea.Location = new System.Drawing.Point(14, 43);
+            this.dragSpaceArea.Location = new System.Drawing.Point(14, 28);
             this.dragSpaceArea.Name = "dragSpaceArea";
-            this.dragSpaceArea.Size = new System.Drawing.Size(199, 59);
+            this.dragSpaceArea.Size = new System.Drawing.Size(511, 49);
             this.dragSpaceArea.TabIndex = 4;
             this.dragSpaceArea.DragDrop += new System.Windows.Forms.DragEventHandler(this.DragDrop);
             this.dragSpaceArea.DragEnter += new System.Windows.Forms.DragEventHandler(this.DragEnter);
+            // 
+            // resultTextBox
+            // 
+            this.resultTextBox.Location = new System.Drawing.Point(14, 80);
+            this.resultTextBox.Multiline = true;
+            this.resultTextBox.Name = "resultTextBox";
+            this.resultTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.resultTextBox.Size = new System.Drawing.Size(511, 224);
+            this.resultTextBox.TabIndex = 5;
+            this.resultTextBox.WordWrap = false;
+            // 
+            // clearButton
+            // 
+            this.clearButton.Location = new System.Drawing.Point(432, 262);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(74, 23);
+            this.clearButton.TabIndex = 6;
+            this.clearButton.Text = "結果のクリア";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(224, 108);
+            this.ClientSize = new System.Drawing.Size(536, 307);
+            this.Controls.Add(this.clearButton);
+            this.Controls.Add(this.resultTextBox);
             this.Controls.Add(this.dragSpaceArea);
             this.Controls.Add(this.outDirLabel);
             this.Controls.Add(this.outDirTextBox);
@@ -87,6 +111,8 @@ namespace DropZip
         private System.Windows.Forms.TextBox outDirTextBox;
         private System.Windows.Forms.Label outDirLabel;
         private System.Windows.Forms.Label dragSpaceArea;
+        private System.Windows.Forms.TextBox resultTextBox;
+        private System.Windows.Forms.Button clearButton;
     }
 }
 

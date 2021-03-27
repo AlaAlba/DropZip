@@ -17,6 +17,7 @@ namespace DropZip
         public Form1()
         {
             InitializeComponent();
+            this.dragSpaceArea.Text = "ここにファイルをドラッグしてください";
         }
 
         private void textBoxOutDir_TextChanged(object sender, EventArgs e)
@@ -31,24 +32,25 @@ namespace DropZip
         /// <param name="e"></param>
         private async void DragDrop(object sender, DragEventArgs e)
         {
-            // dragSpaceArea.Text = "";
 
-            // ドロップされたファイルのファイル名を取得する
+            // フォルダ名を取得する
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
+            // ドロップされたフォルダ分処理を行う
             for (int i = 0; i < files.Length; i++)
             {
                 string filePath = files[i];
 
                 string fileName = Path.GetFileNameWithoutExtension(filePath);
 
+                // 出力先に同名のファイルが存在している場合は処理を行わない
                 var fileExits = Directory
                     .GetFiles(this.outDirTextBox.Text, $"{fileName}*")
                     .Any();
 
                 if (fileExits)
                 {
-                    dragSpaceArea.Text += $"{fileName} は既に存在しています。\r\n";
+                    resultTextBox.Text += $"{fileName} は既に存在しています。\r\n";
                 }
                 else
                 {
@@ -60,7 +62,7 @@ namespace DropZip
 
                     if (result)
                     {
-                        dragSpaceArea.Text += filePath + " Done! \r\n";
+                        resultTextBox.Text += filePath + " Done! \r\n";
                     }
 
                 }
@@ -103,7 +105,7 @@ namespace DropZip
         /// <returns></returns>
         private async Task<Boolean> CreateZipFile(string srcFilePath, string dstFilePath)
         {
-            // TODO: 例外処理
+            // TODO: 例外処理 (現在は常にtrueを返す)
 
             await Task.Run(() =>
             {
@@ -115,6 +117,16 @@ namespace DropZip
             });
 
             return true;
+        }
+
+        /// <summary>
+        /// 結果表示スペースのテキストをクリアする
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            resultTextBox.Clear();
         }
     }
 }
