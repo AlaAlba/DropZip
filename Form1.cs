@@ -29,9 +29,9 @@ namespace DropZip
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DragDrop(object sender, DragEventArgs e)
+        private async void DragDrop(object sender, DragEventArgs e)
         {
-            dragSpaceArea.Text = "";
+            // dragSpaceArea.Text = "";
 
             // ドロップされたファイルのファイル名を取得する
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
@@ -52,12 +52,16 @@ namespace DropZip
                 }
                 else
                 {
-                    // Zip化
-                    ZipFile.CreateFromDirectory(
+                    // 非同期でZipファイル作成を行う
+                    var result = await CreateZipFile(
                         filePath,
                         Path.Combine(this.outDirTextBox.Text, fileName + ".zip")
-                        );
-                    dragSpaceArea.Text += filePath + " Done! \r\n";
+                    );
+
+                    if (result)
+                    {
+                        dragSpaceArea.Text += filePath + " Done! \r\n";
+                    }
 
                 }
             }
@@ -89,6 +93,28 @@ namespace DropZip
             {
                 e.Effect = DragDropEffects.None;
             }
+        }
+
+        /// <summary>
+        /// Zipファイルの作成
+        /// </summary>
+        /// <param name="srcFilePath">Zip化するフォルダのパス(絶対パス)</param>
+        /// <param name="dstFilePath">ZIp化後のファイルのパス(絶対パス)</param>
+        /// <returns></returns>
+        private async Task<Boolean> CreateZipFile(string srcFilePath, string dstFilePath)
+        {
+            // TODO: 例外処理
+
+            await Task.Run(() =>
+            {
+                // Zip化
+                ZipFile.CreateFromDirectory(
+                    srcFilePath,
+                    dstFilePath
+                );
+            });
+
+            return true;
         }
     }
 }
