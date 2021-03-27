@@ -36,9 +36,11 @@ namespace DropZip
             // 
             // outDirTextBox
             // 
+            this.outDirTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.outDirTextBox.Location = new System.Drawing.Point(96, 6);
             this.outDirTextBox.Name = "outDirTextBox";
-            this.outDirTextBox.Size = new System.Drawing.Size(313, 19);
+            this.outDirTextBox.Size = new System.Drawing.Size(117, 19);
             this.outDirTextBox.TabIndex = 1;
             this.outDirTextBox.TextChanged += new System.EventHandler(this.textBoxOutDir_TextChanged);
             // 
@@ -54,10 +56,13 @@ namespace DropZip
             // dragSpaceArea
             // 
             this.dragSpaceArea.AllowDrop = true;
+            this.dragSpaceArea.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dragSpaceArea.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.dragSpaceArea.Location = new System.Drawing.Point(14, 43);
             this.dragSpaceArea.Name = "dragSpaceArea";
-            this.dragSpaceArea.Size = new System.Drawing.Size(395, 229);
+            this.dragSpaceArea.Size = new System.Drawing.Size(199, 59);
             this.dragSpaceArea.TabIndex = 4;
             this.dragSpaceArea.DragDrop += new System.Windows.Forms.DragEventHandler(this.DragDrop);
             this.dragSpaceArea.DragEnter += new System.Windows.Forms.DragEventHandler(this.DragEnter);
@@ -66,10 +71,11 @@ namespace DropZip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 278);
+            this.ClientSize = new System.Drawing.Size(224, 108);
             this.Controls.Add(this.dragSpaceArea);
             this.Controls.Add(this.outDirLabel);
             this.Controls.Add(this.outDirTextBox);
+            this.MinimumSize = new System.Drawing.Size(240, 120);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
