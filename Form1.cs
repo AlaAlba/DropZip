@@ -76,7 +76,7 @@ namespace DropZip
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DragEnter(object sender, DragEventArgs e)
+        private new void DragEnter(object sender, DragEventArgs e)
         {
             // 正しい出力ディレクトリが指定されていなければ受け入れない
             if (!Directory.Exists(outDirTextBox.Text))

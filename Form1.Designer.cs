@@ -29,6 +29,7 @@ namespace DropZip
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.outDirTextBox = new System.Windows.Forms.TextBox();
             this.outDirLabel = new System.Windows.Forms.Label();
             this.dragSpaceArea = new System.Windows.Forms.Label();
@@ -75,13 +76,13 @@ namespace DropZip
             this.resultTextBox.Multiline = true;
             this.resultTextBox.Name = "resultTextBox";
             this.resultTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.resultTextBox.Size = new System.Drawing.Size(511, 224);
+            this.resultTextBox.Size = new System.Drawing.Size(511, 186);
             this.resultTextBox.TabIndex = 5;
             this.resultTextBox.WordWrap = false;
             // 
             // clearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(432, 262);
+            this.clearButton.Location = new System.Drawing.Point(450, 272);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(74, 23);
             this.clearButton.TabIndex = 6;
@@ -99,9 +100,10 @@ namespace DropZip
             this.Controls.Add(this.dragSpaceArea);
             this.Controls.Add(this.outDirLabel);
             this.Controls.Add(this.outDirTextBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(240, 120);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "DropZip";
             this.ResumeLayout(false);
             this.PerformLayout();
 
