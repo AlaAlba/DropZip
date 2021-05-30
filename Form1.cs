@@ -7,6 +7,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,6 +26,9 @@ namespace DropZip
 
         }
 
+
+        static SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
+
         /// <summary>
         /// ドラッグ完了時イベント
         /// </summary>
@@ -32,43 +36,50 @@ namespace DropZip
         /// <param name="e"></param>
         private async void DragDrop(object sender, DragEventArgs e)
         {
+            await semaphore.WaitAsync(); // ロックを取得
 
-            // フォルダ名を取得する
-            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-
-            // ドロップされたフォルダ分処理を行う
-            for (int i = 0; i < files.Length; i++)
+            try
             {
-                string filePath = files[i];
+                // フォルダ名を取得する
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
-                string fileName = Path.GetFileNameWithoutExtension(filePath);
-
-                // 出力先に同名のファイルが存在している場合は処理を行わない
-                var fileExits = Directory
-                    .GetFiles(this.outDirTextBox.Text, $"{fileName}*")
-                    .Any();
-
-                if (fileExits)
+                // ドロップされたフォルダ分処理を行う
+                for (int i = 0; i < files.Length; i++)
                 {
-                    resultTextBox.Text += $"{fileName} は既に存在しています。\r\n";
-                }
-                else
-                {
-                    // 非同期でZipファイル作成を行う
-                    var result = await CreateZipFile(
-                        filePath,
-                        Path.Combine(this.outDirTextBox.Text, fileName + ".zip")
-                    );
+                    string filePath = files[i];
 
-                    if (result)
+                    string fileName = Path.GetFileNameWithoutExtension(filePath);
+
+                    // 出力先に同名のファイルが存在している場合は処理を行わない
+                    var fileExits = Directory
+                        .GetFiles(this.outDirTextBox.Text, $"{fileName}*")
+                        .Any();
+
+                    if (fileExits)
                     {
-                        resultTextBox.Text += filePath + " Done! \r\n";
+                        resultTextBox.Text += $"{fileName} は既に存在しています。\r\n";
                     }
+                    else
+                    {
+                        // 非同期でZipファイル作成を行う
+                        var result = await CreateZipFile(
+                            filePath,
+                            Path.Combine(this.outDirTextBox.Text, fileName + ".zip")
+                        );
 
+                        if (result)
+                        {
+                            resultTextBox.Text += filePath + " Done! \r\n";
+                        }
+
+                    }
                 }
             }
-
-
+            finally
+            {
+                semaphore.Release();
+            }
+            
         }
 
         /// <summary>
