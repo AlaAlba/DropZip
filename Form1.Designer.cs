@@ -43,7 +43,7 @@ namespace DropZip
             | System.Windows.Forms.AnchorStyles.Right)));
             this.outDirTextBox.Location = new System.Drawing.Point(96, 6);
             this.outDirTextBox.Name = "outDirTextBox";
-            this.outDirTextBox.Size = new System.Drawing.Size(429, 19);
+            this.outDirTextBox.Size = new System.Drawing.Size(277, 19);
             this.outDirTextBox.TabIndex = 1;
             this.outDirTextBox.TextChanged += new System.EventHandler(this.textBoxOutDir_TextChanged);
             // 
@@ -59,30 +59,33 @@ namespace DropZip
             // dragSpaceArea
             // 
             this.dragSpaceArea.AllowDrop = true;
-            this.dragSpaceArea.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dragSpaceArea.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dragSpaceArea.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.dragSpaceArea.Location = new System.Drawing.Point(14, 28);
             this.dragSpaceArea.Name = "dragSpaceArea";
-            this.dragSpaceArea.Size = new System.Drawing.Size(511, 49);
+            this.dragSpaceArea.Size = new System.Drawing.Size(359, 53);
             this.dragSpaceArea.TabIndex = 4;
             this.dragSpaceArea.DragDrop += new System.Windows.Forms.DragEventHandler(this.DragDrop);
             this.dragSpaceArea.DragEnter += new System.Windows.Forms.DragEventHandler(this.DragEnter);
             // 
             // resultTextBox
             // 
-            this.resultTextBox.Location = new System.Drawing.Point(14, 80);
+            this.resultTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.resultTextBox.Location = new System.Drawing.Point(14, 84);
             this.resultTextBox.Multiline = true;
             this.resultTextBox.Name = "resultTextBox";
             this.resultTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.resultTextBox.Size = new System.Drawing.Size(511, 186);
+            this.resultTextBox.Size = new System.Drawing.Size(359, 186);
             this.resultTextBox.TabIndex = 5;
             this.resultTextBox.WordWrap = false;
             // 
             // clearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(450, 272);
+            this.clearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.clearButton.Location = new System.Drawing.Point(298, 276);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(74, 23);
             this.clearButton.TabIndex = 6;
@@ -94,14 +97,14 @@ namespace DropZip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 307);
+            this.ClientSize = new System.Drawing.Size(384, 311);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.resultTextBox);
             this.Controls.Add(this.dragSpaceArea);
             this.Controls.Add(this.outDirLabel);
             this.Controls.Add(this.outDirTextBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(240, 120);
+            this.MinimumSize = new System.Drawing.Size(250, 350);
             this.Name = "Form1";
             this.Text = "DropZip";
             this.ResumeLayout(false);
