@@ -18,7 +18,7 @@ namespace DropZip
         public Form1()
         {
             InitializeComponent();
-            this.dragSpaceArea.Text = "ここにファイルをドラッグしてください";
+            this.dragSpaceArea.Text = "ここにフォルダをドラッグしてください";
         }
 
         private void textBoxOutDir_TextChanged(object sender, EventArgs e)
@@ -34,7 +34,7 @@ namespace DropZip
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void DragDrop(object sender, DragEventArgs e)
+        private new async void DragDrop(object sender, DragEventArgs e)
         {
             await semaphore.WaitAsync(); // ロックを取得
 
