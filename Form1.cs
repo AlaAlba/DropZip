@@ -41,35 +41,35 @@ namespace DropZip
             try
             {
                 // フォルダ名を取得する
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+                string[] folders = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
                 // ドロップされたフォルダ分処理を行う
-                for (int i = 0; i < files.Length; i++)
+                for (int i = 0; i < folders.Length; i++)
                 {
-                    string filePath = files[i];
+                    string folderPath = folders[i];
 
-                    string fileName = Path.GetFileNameWithoutExtension(filePath);
+                    string folderName = Path.GetFileName(folderPath);
 
                     // 出力先に同名のファイルが存在している場合は処理を行わない
                     var fileExits = Directory
-                        .GetFiles(this.outDirTextBox.Text, $"{fileName}*")
+                        .GetFiles(this.outDirTextBox.Text, $"{folderName}*")
                         .Any();
 
                     if (fileExits)
                     {
-                        resultTextBox.Text += $"{fileName} は既に存在しています。\r\n";
+                        resultTextBox.Text += $"{folderName} は既に存在しています。\r\n";
                     }
                     else
                     {
                         // 非同期でZipファイル作成を行う
                         var result = await CreateZipFile(
-                            filePath,
-                            Path.Combine(this.outDirTextBox.Text, fileName + ".zip")
+                            folderPath,
+                            Path.Combine(this.outDirTextBox.Text, folderName + ".zip")
                         );
 
                         if (result)
                         {
-                            resultTextBox.Text += filePath + " Done! \r\n";
+                            resultTextBox.Text += folderPath + " Done! \r\n";
                         }
 
                     }
@@ -96,9 +96,20 @@ namespace DropZip
                 return;
             }
 
+            // フォルダ以外がドロップされた場合は受け入れない
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            bool isFolder = true;
 
-            // エクスプローラーからのファイルのドロップでなければ受け入れない
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            foreach (string file in files)
+            {
+                if (!System.IO.Directory.Exists(file))
+                {
+                    isFolder = false;
+                    break;
+                }
+            }
+
+            if (isFolder)
             {
                 e.Effect = DragDropEffects.All;
             }
@@ -111,10 +122,10 @@ namespace DropZip
         /// <summary>
         /// Zipファイルの作成
         /// </summary>
-        /// <param name="srcFilePath">Zip化するフォルダのパス(絶対パス)</param>
-        /// <param name="dstFilePath">ZIp化後のファイルのパス(絶対パス)</param>
+        /// <param name="srcFolderPath">Zip化するフォルダのパス(絶対パス)</param>
+        /// <param name="dstFilePath">Zip化後のファイルのパス(絶対パス)</param>
         /// <returns></returns>
-        private async Task<Boolean> CreateZipFile(string srcFilePath, string dstFilePath)
+        private async Task<Boolean> CreateZipFile(string srcFolderPath, string dstFilePath)
         {
             // TODO: 例外処理 (現在は常にtrueを返す)
 
@@ -122,7 +133,7 @@ namespace DropZip
             {
                 // Zip化
                 ZipFile.CreateFromDirectory(
-                    srcFilePath,
+                    srcFolderPath,
                     dstFilePath
                 );
             });
